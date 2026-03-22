@@ -96,6 +96,26 @@ export const posts: BlogPost[] = [
     ],
     relatedTool: "nmap",
   },
+  {
+    slug: "xss-payload-cheat-sheet",
+    title: "XSS Payload Cheat Sheet 2026 — Context-Aware Payloads, WAF Bypass, and Filter Evasion",
+    description:
+      "Complete XSS payload cheat sheet for pentesters and bug bounty hunters. Covers injection contexts, WAF bypass techniques, encoding tricks, polyglot payloads, and filter evasion with copy-paste ready examples.",
+    date: "2026-03-22",
+    author: "4252nez",
+    keywords: [
+      "XSS cheat sheet",
+      "XSS payloads",
+      "cross site scripting payloads",
+      "XSS payload list",
+      "XSS filter bypass",
+      "XSS WAF bypass",
+      "XSS encoding",
+      "XSS polyglot",
+      "XSS pentest",
+    ],
+    relatedTool: "xss",
+  },
 ];
 
 export function getSortedPosts(): BlogPost[] {

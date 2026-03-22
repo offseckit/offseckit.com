@@ -82,7 +82,8 @@ export default function Home() {
                 sent to any server. No tracking, no accounts, no BS.
               </p>
               <p>
-                Each tool is also available as a standalone CLI tool on{" "}
+                All tools are also available via{" "}
+                <code className="text-dracula-green">osk</code>, our unified CLI toolkit on{" "}
                 <a
                   href="https://github.com/offseckit"
                   className="text-dracula-cyan hover:underline"

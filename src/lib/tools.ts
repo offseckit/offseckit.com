@@ -85,12 +85,15 @@ export const tools: Tool[] = [
     description:
       "Context-aware XSS payload generation with WAF bypass variants and filter evasion techniques.",
     category: "exploitation",
-    status: "coming-soon",
+    status: "live",
     icon: "code",
     keywords: [
       "XSS payloads",
       "XSS cheat sheet",
       "cross site scripting payloads",
+      "XSS payload generator",
+      "XSS filter bypass",
+      "XSS WAF bypass",
     ],
   },
   {

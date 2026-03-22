@@ -110,7 +110,7 @@ body {
 
 /* Hero logo glow */
 .logo-glow {
-  filter: drop-shadow(0 0 20px rgba(255, 121, 198, 0.35)) drop-shadow(0 0 40px rgba(189, 147, 249, 0.2));
+  filter: drop-shadow(0 0 12px rgba(255, 121, 198, 0.45)) drop-shadow(0 0 40px rgba(255, 121, 198, 0.2)) drop-shadow(0 0 70px rgba(189, 147, 249, 0.2)) drop-shadow(0 0 100px rgba(189, 147, 249, 0.1));
 }
 
 /* Subtle grid background for hero — fades out at edges */
