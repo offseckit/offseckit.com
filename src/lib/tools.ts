@@ -103,9 +103,9 @@ export const tools: Tool[] = [
     description:
       "Analyze HTTP response headers for security misconfigurations with remediation guidance.",
     category: "analysis",
-    status: "coming-soon",
+    status: "live",
     icon: "shield",
-    keywords: ["security headers check", "HTTP security headers analyzer"],
+    keywords: ["security headers check", "HTTP security headers analyzer", "security headers scanner", "HTTP header checker", "content security policy", "HSTS checker"],
   },
   {
     slug: "cvss",

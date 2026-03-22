@@ -116,6 +116,25 @@ export const posts: BlogPost[] = [
     ],
     relatedTool: "xss",
   },
+  {
+    slug: "security-headers-guide",
+    title: "HTTP Security Headers Cheat Sheet 2026 — HSTS, CSP, X-Frame-Options, and More",
+    description:
+      "Complete guide to HTTP security headers for pentesters and developers. Covers HSTS, Content-Security-Policy, X-Frame-Options, Referrer-Policy, Permissions-Policy, OWASP recommendations, deprecated headers, and remediation guidance.",
+    date: "2026-03-22",
+    author: "4252nez",
+    keywords: [
+      "HTTP security headers",
+      "security headers cheat sheet",
+      "HSTS header",
+      "Content-Security-Policy",
+      "CSP cheat sheet",
+      "X-Frame-Options",
+      "security headers check",
+      "OWASP security headers",
+    ],
+    relatedTool: "headers",
+  },
 ];
 
 export function getSortedPosts(): BlogPost[] {
