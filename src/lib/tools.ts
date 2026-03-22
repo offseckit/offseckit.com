@@ -114,9 +114,9 @@ export const tools: Tool[] = [
     description:
       "Interactive CVSS 3.1 and 4.0 vector builder with real-time score calculation.",
     category: "analysis",
-    status: "coming-soon",
+    status: "live",
     icon: "gauge",
-    keywords: ["CVSS calculator", "CVSS 3.1 calculator", "CVSS 4.0 calculator"],
+    keywords: ["CVSS calculator", "CVSS 3.1 calculator", "CVSS 4.0 calculator", "CVSS score calculator", "vulnerability scoring", "CVSS vector builder"],
   },
   {
     slug: "subnet",

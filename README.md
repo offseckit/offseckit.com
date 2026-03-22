@@ -17,7 +17,7 @@ Every tool runs 100% client-side — no data leaves your browser. No accounts, n
 | Nmap Command Builder | [Use it](https://offseckit.com/tools/nmap) | `osk nmap` |
 | XSS Payload Generator | [Use it](https://offseckit.com/tools/xss) | `osk xss` |
 | HTTP Header Security Analyzer | [Use it](https://offseckit.com/tools/headers) | `osk headers` |
-| CVSS Calculator | Coming soon | — |
+| CVSS Calculator | [Use it](https://offseckit.com/tools/cvss) | `osk cvss` |
 | Subnet/CIDR Calculator | Coming soon | — |
 | CLI Output Formatter | Coming soon | — |
 
