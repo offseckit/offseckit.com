@@ -8,59 +8,49 @@ Every tool runs 100% client-side — no data leaves your browser. No accounts, n
 
 ## Tools
 
-| Tool | Status | Web | CLI |
-|------|--------|-----|-----|
-| [Reverse Shell Generator](https://offseckit.com/tools/revshell) | Live | [Use it](https://offseckit.com/tools/revshell) | [revshell](https://github.com/offseckit/revshell) |
-| Encoding/Decoding Multi-Tool | Coming soon | — | — |
-| Hash Identifier & Generator | Coming soon | — | — |
-| JWT Decoder & Analyzer | Coming soon | — | — |
-| Nmap Command Builder | Coming soon | — | — |
-| XSS Payload Generator | Coming soon | — | — |
-| HTTP Header Security Analyzer | Coming soon | — | — |
-| CVSS Calculator | Coming soon | — | — |
-| Subnet/CIDR Calculator | Coming soon | — | — |
-| CLI Output Formatter | Coming soon | — | — |
+| Tool | Web | CLI |
+|------|-----|-----|
+| Reverse Shell Generator | [Use it](https://offseckit.com/tools/revshell) | `osk revshell` |
+| Encoding/Decoding Multi-Tool | [Use it](https://offseckit.com/tools/encode) | `osk encode` |
+| Hash Identifier & Generator | [Use it](https://offseckit.com/tools/hash) | `osk hash` |
+| JWT Decoder & Analyzer | [Use it](https://offseckit.com/tools/jwt) | `osk jwt` |
+| Nmap Command Builder | [Use it](https://offseckit.com/tools/nmap) | `osk nmap` |
+| XSS Payload Generator | [Use it](https://offseckit.com/tools/xss) | `osk xss` |
+| HTTP Header Security Analyzer | [Use it](https://offseckit.com/tools/headers) | `osk headers` |
+| CVSS Calculator | Coming soon | — |
+| Subnet/CIDR Calculator | Coming soon | — |
+| CLI Output Formatter | Coming soon | — |
 
-## CLI Tools
+## CLI
 
-Each tool is also available as a standalone CLI tool, installable via pip:
+All tools are available via `osk`, our unified CLI toolkit:
 
 ```bash
-pip install offseckit-revshell
+pip install offseckit
 ```
 
-See [all CLI tools](https://github.com/offseckit) on GitHub.
+```bash
+osk revshell -i 10.10.10.10 -l python
+osk encode -o base64-encode "Hello World"
+osk hash id 5d41402abc4b2a76b9719d911017c592
+osk jwt decode eyJhbGciOiJIUzI1NiIs...
+osk nmap build -t 10.10.10.0/24 --syn --top-ports 1000
+osk xss gen --context html-attr --action alert
+curl -sI https://example.com | osk headers analyze
+```
+
+See [offseckit/osk](https://github.com/offseckit/osk) for full documentation.
 
 ## Development
-
-### Prerequisites
-
-- Node.js 18+
-- npm
-
-### Setup
 
 ```bash
 git clone https://github.com/offseckit/offseckit.com.git
 cd offseckit.com
 npm install
-```
-
-### Run locally
-
-```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
-
-### Build for production
-
-```bash
-npm run build
-```
-
-Static output goes to `out/`.
 
 ## Tech Stack
 
@@ -71,7 +61,7 @@ Static output goes to `out/`.
 
 ## Contributing
 
-Found a bug? Missing a shell variant? PRs welcome.
+Found a bug? Missing a feature? PRs welcome.
 
 ## License
 
