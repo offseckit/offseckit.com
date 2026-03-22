@@ -136,11 +136,15 @@ export const tools: Tool[] = [
     description:
       "Paste terminal output from security tools and generate styled, Dracula-themed screenshots.",
     category: "utility",
-    status: "coming-soon",
+    status: "live",
     icon: "image",
     keywords: [
       "terminal screenshot generator",
       "command output formatter",
+      "terminal to image",
+      "CLI output beautifier",
+      "terminal screenshot online",
+      "code screenshot generator",
     ],
   },
 ];

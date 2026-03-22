@@ -171,6 +171,24 @@ export const posts: BlogPost[] = [
     ],
     relatedTool: "subnet",
   },
+  {
+    slug: "cli-output-formatter-guide",
+    title: "Terminal Screenshot Guide 2026 — Generate Beautiful CLI Output Images for Pentest Reports",
+    description:
+      "Complete guide to generating professional terminal screenshots for pentest reports, documentation, and blog posts. Covers ANSI color codes, terminal themes, export options, and tips for making security tool output look great.",
+    date: "2026-03-22",
+    author: "4252nez",
+    keywords: [
+      "terminal screenshot generator",
+      "CLI output formatter",
+      "terminal to image",
+      "ANSI color codes",
+      "pentest report screenshots",
+      "terminal beautifier",
+      "code screenshot tool",
+    ],
+    relatedTool: "cli-format",
+  },
 ];
 
 export function getSortedPosts(): BlogPost[] {
