@@ -125,9 +125,9 @@ export const tools: Tool[] = [
     description:
       "Calculate network addresses, broadcast addresses, host ranges, and split subnets from CIDR notation.",
     category: "recon",
-    status: "coming-soon",
+    status: "live",
     icon: "network",
-    keywords: ["subnet calculator", "CIDR calculator", "IP range calculator"],
+    keywords: ["subnet calculator", "CIDR calculator", "IP range calculator", "subnet mask calculator", "network address calculator", "IP subnet calculator"],
   },
   {
     slug: "cli-format",

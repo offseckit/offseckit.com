@@ -153,6 +153,24 @@ export const posts: BlogPost[] = [
     ],
     relatedTool: "cvss",
   },
+  {
+    slug: "subnet-calculator-guide",
+    title: "Subnet Calculator Cheat Sheet 2026 — CIDR Notation, Subnet Masks, and IP Ranges for Pentesters",
+    description:
+      "Complete guide to subnetting for pentesters and network engineers. Covers CIDR notation, subnet masks, wildcard masks, subnet splitting, RFC 1918 private ranges, and practical tips for scope verification and network enumeration.",
+    date: "2026-03-22",
+    author: "4252nez",
+    keywords: [
+      "subnet calculator",
+      "CIDR cheat sheet",
+      "subnet mask chart",
+      "CIDR notation guide",
+      "IP subnetting",
+      "wildcard mask",
+      "pentest subnet",
+    ],
+    relatedTool: "subnet",
+  },
 ];
 
 export function getSortedPosts(): BlogPost[] {

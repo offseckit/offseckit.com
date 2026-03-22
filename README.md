@@ -18,7 +18,7 @@ Every tool runs 100% client-side — no data leaves your browser. No accounts, n
 | XSS Payload Generator | [Use it](https://offseckit.com/tools/xss) | `osk xss` |
 | HTTP Header Security Analyzer | [Use it](https://offseckit.com/tools/headers) | `osk headers` |
 | CVSS Calculator | [Use it](https://offseckit.com/tools/cvss) | `osk cvss` |
-| Subnet/CIDR Calculator | Coming soon | — |
+| Subnet/CIDR Calculator | [Use it](https://offseckit.com/tools/subnet) | `osk subnet` |
 | CLI Output Formatter | Coming soon | — |
 
 ## CLI
