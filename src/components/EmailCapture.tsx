@@ -41,7 +41,7 @@ export default function EmailCapture({ variant = "tools" }: EmailCaptureProps) {
         </p>
       ) : (
         <form
-          action="https://buttondown.com/api/emails/embed-subscribe/PLACEHOLDER_USERNAME"
+          action="https://buttondown.com/api/emails/embed-subscribe/4252nez"
           method="post"
           target="_blank"
           onSubmit={() => setSubmitted(true)}
