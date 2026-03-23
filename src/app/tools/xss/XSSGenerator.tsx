@@ -23,11 +23,61 @@ import CopyButton from "@/components/CopyButton";
 
 type Section = "context" | "action" | "encoding" | "waf" | "filters" | "payloads" | "polyglots" | "reference";
 
+/* ── URL hash serialization ────────────────────────────────────── */
+
+function serializeConfigToHash(config: XssConfig): string {
+  try {
+    const state = {
+      c: config.context,
+      a: config.action,
+      j: config.customJs,
+      e: config.encoding,
+      w: config.wafProfile,
+      b: config.blockedChars,
+    };
+    const json = JSON.stringify(state);
+    return btoa(unescape(encodeURIComponent(json)));
+  } catch {
+    return "";
+  }
+}
+
+function deserializeConfigFromHash(hash: string): XssConfig | null {
+  try {
+    const clean = hash.replace(/^#/, "");
+    if (!clean) return null;
+    const json = decodeURIComponent(escape(atob(clean)));
+    const state = JSON.parse(json);
+    if (typeof state.c === "string" && typeof state.a === "string") {
+      return {
+        context: state.c as InjectionContext,
+        action: state.a as XssAction,
+        customJs: state.j ?? "",
+        encoding: state.e as EncodingType,
+        wafProfile: state.w as WafProfile,
+        blockedChars: state.b ?? "",
+      };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function getInitialXssConfig(): XssConfig {
+  if (typeof window !== "undefined") {
+    const parsed = deserializeConfigFromHash(window.location.hash);
+    if (parsed) return parsed;
+  }
+  return getDefaultConfig();
+}
+
 export default function XSSGenerator() {
-  const [config, setConfig] = useState<XssConfig>(getDefaultConfig());
+  const [config, setConfig] = useState<XssConfig>(getInitialXssConfig);
   const [expandedSections, setExpandedSections] = useState<Set<Section>>(
     new Set(["context", "action", "payloads"])
   );
+  const [shared, setShared] = useState(false);
 
   const payloads = useMemo(() => generatePayloads(config), [config]);
   const polyglots = useMemo(
@@ -58,6 +108,17 @@ export default function XSSGenerator() {
     setConfig(getDefaultConfig());
   }, []);
 
+  const handleShare = useCallback(() => {
+    const hash = serializeConfigToHash(config);
+    if (hash && typeof window !== "undefined") {
+      const url = window.location.origin + window.location.pathname + "#" + hash;
+      window.history.replaceState(null, "", "#" + hash);
+      navigator.clipboard.writeText(url);
+      setShared(true);
+      setTimeout(() => setShared(false), 2000);
+    }
+  }, [config]);
+
   const contextInfo = CONTEXTS.find((c) => c.id === config.context);
 
   return (
@@ -76,7 +137,7 @@ export default function XSSGenerator() {
               key={ctx.id}
               className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-all ${
                 config.context === ctx.id
-                  ? "border-dracula-purple bg-dracula-purple/5"
+                  ? "border-dracula-purple bg-dracula-purple/10 text-dracula-purple shadow-[0_0_12px_rgba(189,147,249,0.3)]"
                   : "border-border bg-surface hover:border-dracula-comment"
               }`}
             >
@@ -120,7 +181,7 @@ export default function XSSGenerator() {
                 onClick={() => update("action", act.id as XssAction)}
                 className={`text-left rounded-lg border p-3 transition-all ${
                   config.action === act.id
-                    ? "border-dracula-green bg-dracula-green/5"
+                    ? "border-dracula-green bg-dracula-green/10 shadow-[0_0_12px_rgba(80,250,123,0.3)]"
                     : "border-border bg-surface hover:border-dracula-comment"
                 }`}
               >
@@ -166,7 +227,7 @@ export default function XSSGenerator() {
               onClick={() => update("encoding", enc.id as EncodingType)}
               className={`text-left rounded-lg border p-2 transition-all ${
                 config.encoding === enc.id
-                  ? "border-dracula-cyan bg-dracula-cyan/5"
+                  ? "border-dracula-cyan bg-dracula-cyan/10 shadow-[0_0_12px_rgba(139,233,253,0.3)]"
                   : "border-border bg-surface hover:border-dracula-comment"
               }`}
             >
@@ -196,7 +257,7 @@ export default function XSSGenerator() {
               onClick={() => update("wafProfile", waf.id as WafProfile)}
               className={`text-left rounded-lg border p-3 transition-all ${
                 config.wafProfile === waf.id
-                  ? "border-dracula-orange bg-dracula-orange/5"
+                  ? "border-dracula-orange bg-dracula-orange/10 shadow-[0_0_12px_rgba(255,184,108,0.3)]"
                   : "border-border bg-surface hover:border-dracula-comment"
               }`}
             >
@@ -277,12 +338,21 @@ export default function XSSGenerator() {
                   <> | WAF: <span className="text-dracula-orange">{WAF_PROFILES.find((w) => w.id === config.wafProfile)?.name}</span></>
                 )}
               </p>
-              <button
-                onClick={reset}
-                className="text-xs px-3 py-1 rounded border border-border text-dracula-red hover:bg-dracula-red/10 transition-all"
-              >
-                Reset
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleShare}
+                  className="text-xs px-3 py-1 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-green transition-all"
+                  title="Copy shareable URL with current configuration"
+                >
+                  {shared ? "Copied!" : "Share URL"}
+                </button>
+                <button
+                  onClick={reset}
+                  className="text-xs px-3 py-1 rounded border border-border text-dracula-red hover:bg-dracula-red/10 transition-all"
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           )}
 

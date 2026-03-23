@@ -16,11 +16,47 @@ import CopyButton from "@/components/CopyButton";
 
 type Section = "presets" | "scan" | "ports" | "detection" | "scripts" | "timing" | "output" | "evasion";
 
+/* ── URL hash serialization ────────────────────────────────────── */
+
+function serializeConfigToHash(config: NmapConfig): string {
+  try {
+    const json = JSON.stringify(config);
+    return btoa(unescape(encodeURIComponent(json)));
+  } catch {
+    return "";
+  }
+}
+
+function deserializeConfigFromHash(hash: string): NmapConfig | null {
+  try {
+    const clean = hash.replace(/^#/, "");
+    if (!clean) return null;
+    const json = decodeURIComponent(escape(atob(clean)));
+    const state = JSON.parse(json);
+    if (typeof state.target === "string" && typeof state.scanType === "string") {
+      return state as NmapConfig;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function getInitialConfig(): NmapConfig {
+  if (typeof window !== "undefined") {
+    const parsed = deserializeConfigFromHash(window.location.hash);
+    if (parsed) return parsed;
+  }
+  return getDefaultConfig();
+}
+
 export default function NmapBuilder() {
-  const [config, setConfig] = useState<NmapConfig>(getDefaultConfig());
+  const [config, setConfig] = useState<NmapConfig>(getInitialConfig);
+  const [activePreset, setActivePreset] = useState<string | null>(null);
   const [expandedSections, setExpandedSections] = useState<Set<Section>>(
     new Set(["presets", "scan", "ports", "detection"])
   );
+  const [shared, setShared] = useState(false);
 
   const command = useMemo(() => buildCommand(config), [config]);
   const noiseLevel = useMemo(() => calculateNoiseLevel(config), [config]);
@@ -37,6 +73,7 @@ export default function NmapBuilder() {
   const update = useCallback(
     <K extends keyof NmapConfig>(key: K, value: NmapConfig[K]) => {
       setConfig((prev) => ({ ...prev, [key]: value }));
+      setActivePreset(null);
     },
     []
   );
@@ -57,6 +94,7 @@ export default function NmapBuilder() {
   const applyPreset = useCallback((presetId: string) => {
     const preset = PRESETS.find((p) => p.id === presetId);
     if (!preset) return;
+    setActivePreset(presetId);
     setConfig((prev) => {
       const base = getDefaultConfig();
       return {
@@ -91,7 +129,19 @@ export default function NmapBuilder() {
 
   const reset = useCallback(() => {
     setConfig(getDefaultConfig());
+    setActivePreset(null);
   }, []);
+
+  const handleShare = useCallback(() => {
+    const hash = serializeConfigToHash(config);
+    if (hash && typeof window !== "undefined") {
+      const url = window.location.origin + window.location.pathname + "#" + hash;
+      window.history.replaceState(null, "", "#" + hash);
+      navigator.clipboard.writeText(url);
+      setShared(true);
+      setTimeout(() => setShared(false), 2000);
+    }
+  }, [config]);
 
   const scanInfo = SCAN_TYPES.find((s) => s.id === config.scanType);
 
@@ -120,6 +170,13 @@ export default function NmapBuilder() {
           </h2>
           <div className="flex items-center gap-3">
             <NoiseIndicator level={noiseLevel} />
+            <button
+              onClick={handleShare}
+              className="text-xs px-3 py-1 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-green transition-all"
+              title="Copy shareable URL with current configuration"
+            >
+              {shared ? "Copied!" : "Share URL"}
+            </button>
             <CopyButton text={command} />
           </div>
         </div>
@@ -148,9 +205,15 @@ export default function NmapBuilder() {
             <button
               key={preset.id}
               onClick={() => applyPreset(preset.id)}
-              className="text-left rounded-lg border border-border bg-surface p-3 hover:border-dracula-purple transition-all"
+              className={`text-left rounded-lg border p-3 transition-all ${
+                activePreset === preset.id
+                  ? "border-dracula-purple bg-dracula-purple/10 shadow-[0_0_12px_rgba(189,147,249,0.3)]"
+                  : "border-border bg-surface hover:border-dracula-purple"
+              }`}
             >
-              <span className="text-xs font-semibold text-dracula-green">
+              <span className={`text-xs font-semibold ${
+                activePreset === preset.id ? "text-dracula-purple" : "text-dracula-green"
+              }`}>
                 {preset.name}
               </span>
               <span className="block text-xs text-dracula-comment mt-1">
@@ -186,7 +249,7 @@ export default function NmapBuilder() {
               key={st.id}
               className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-all ${
                 config.scanType === st.id
-                  ? "border-dracula-purple bg-dracula-purple/5"
+                  ? "border-dracula-purple bg-dracula-purple/10 text-dracula-purple shadow-[0_0_12px_rgba(189,147,249,0.3)]"
                   : "border-border bg-surface hover:border-dracula-comment"
               }`}
             >
@@ -241,7 +304,7 @@ export default function NmapBuilder() {
                 onClick={() => update("portMode", opt.id)}
                 className={`text-xs px-3 py-1.5 rounded border transition-all ${
                   config.portMode === opt.id
-                    ? "border-dracula-cyan text-dracula-cyan bg-dracula-cyan/10"
+                    ? "border-dracula-cyan text-dracula-cyan bg-dracula-cyan/10 shadow-[0_0_12px_rgba(139,233,253,0.3)]"
                     : "border-border text-dracula-comment hover:text-foreground hover:border-dracula-comment"
                 }`}
               >
@@ -445,7 +508,7 @@ export default function NmapBuilder() {
               key={t.template}
               className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-all ${
                 config.timing === t.template
-                  ? "border-dracula-orange bg-dracula-orange/5"
+                  ? "border-dracula-orange bg-dracula-orange/10 shadow-[0_0_12px_rgba(255,184,108,0.3)]"
                   : "border-border bg-surface hover:border-dracula-comment"
               }`}
             >

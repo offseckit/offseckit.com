@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   getReverseShells,
   getBindShells,
@@ -17,6 +17,49 @@ type OSFilter = TargetOS | "all";
 
 const LS_KEY_IP = "osk-revshell-ip";
 const LS_KEY_PORT = "osk-revshell-port";
+
+/* ── URL hash serialization ────────────────────────────────────── */
+
+interface RevShellState {
+  l: string;       // selectedLang
+  v: number;       // selectedVariant
+  ip: string;
+  p: string;       // port
+  e: Encoding;     // encoding
+  ts: string;      // targetShell
+  st: ShellType;   // shellType
+}
+
+function serializeToHash(state: RevShellState): string {
+  try {
+    const json = JSON.stringify(state);
+    return btoa(unescape(encodeURIComponent(json)));
+  } catch {
+    return "";
+  }
+}
+
+function deserializeFromHash(hash: string): RevShellState | null {
+  try {
+    const clean = hash.replace(/^#/, "");
+    if (!clean) return null;
+    const json = decodeURIComponent(escape(atob(clean)));
+    const state = JSON.parse(json);
+    if (typeof state.l === "string" && typeof state.ip === "string") {
+      return state as RevShellState;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function getInitialHashState(): RevShellState | null {
+  if (typeof window !== "undefined") {
+    return deserializeFromHash(window.location.hash);
+  }
+  return null;
+}
 
 function filterByOS(shells: ShellLanguage[], filter: OSFilter): ShellLanguage[] {
   if (filter === "all") return shells;
@@ -43,14 +86,16 @@ export default function RevShellGenerator() {
   const reverseShells = getReverseShells();
   const bindShells = getBindShells();
 
-  const [shellType, setShellType] = useState<ShellType>("reverse");
+  const [hashState] = useState(getInitialHashState);
+  const [shellType, setShellType] = useState<ShellType>(hashState?.st ?? "reverse");
   const [osFilter, setOSFilter] = useState<OSFilter>("all");
-  const [selectedLang, setSelectedLang] = useState("bash");
-  const [selectedVariant, setSelectedVariant] = useState(0);
-  const [ip, setIp] = useState(() => readLS(LS_KEY_IP) ?? "10.10.10.10");
-  const [port, setPort] = useState(() => readLS(LS_KEY_PORT) ?? "4444");
-  const [encoding, setEncoding] = useState<Encoding>("raw");
-  const [targetShell, setTargetShell] = useState("/bin/bash");
+  const [selectedLang, setSelectedLang] = useState(hashState?.l ?? "bash");
+  const [selectedVariant, setSelectedVariant] = useState(hashState?.v ?? 0);
+  const [ip, setIp] = useState(() => hashState?.ip ?? readLS(LS_KEY_IP) ?? "10.10.10.10");
+  const [port, setPort] = useState(() => hashState?.p ?? readLS(LS_KEY_PORT) ?? "4444");
+  const [encoding, setEncoding] = useState<Encoding>(hashState?.e ?? "raw");
+  const [targetShell, setTargetShell] = useState(hashState?.ts ?? "/bin/bash");
+  const [shared, setShared] = useState(false);
 
   // Persist IP/port on change
   const handleIpChange = (value: string) => {
@@ -62,6 +107,25 @@ export default function RevShellGenerator() {
     setPort(value);
     writeLS(LS_KEY_PORT, value);
   };
+
+  const handleShare = useCallback(() => {
+    const hash = serializeToHash({
+      l: selectedLang,
+      v: selectedVariant,
+      ip,
+      p: port,
+      e: encoding,
+      ts: targetShell,
+      st: shellType,
+    });
+    if (hash && typeof window !== "undefined") {
+      const url = window.location.origin + window.location.pathname + "#" + hash;
+      window.history.replaceState(null, "", "#" + hash);
+      navigator.clipboard.writeText(url);
+      setShared(true);
+      setTimeout(() => setShared(false), 2000);
+    }
+  }, [selectedLang, selectedVariant, ip, port, encoding, targetShell, shellType]);
 
   const allShells = shellType === "reverse" ? reverseShells : bindShells;
   const filteredShells = filterByOS(allShells, osFilter);
@@ -114,10 +178,10 @@ export default function RevShellGenerator() {
         <div className="flex rounded-lg border border-border overflow-hidden">
           <button
             onClick={() => { setShellType("reverse"); setSelectedLang(reverseShells[0].id); setSelectedVariant(0); }}
-            className={`text-xs px-4 py-2 transition-all ${
+            className={`text-xs px-4 py-2 transition-all border-r border-border ${
               shellType === "reverse"
-                ? "bg-dracula-purple/20 text-dracula-purple border-r border-border"
-                : "bg-surface text-dracula-comment hover:text-foreground border-r border-border"
+                ? "bg-dracula-purple/20 text-dracula-purple shadow-[0_0_12px_rgba(189,147,249,0.3)]"
+                : "bg-surface text-dracula-comment hover:text-foreground"
             }`}
           >
             Reverse Shell
@@ -126,7 +190,7 @@ export default function RevShellGenerator() {
             onClick={() => { setShellType("bind"); setSelectedLang(bindShells[0].id); setSelectedVariant(0); }}
             className={`text-xs px-4 py-2 transition-all ${
               shellType === "bind"
-                ? "bg-dracula-purple/20 text-dracula-purple"
+                ? "bg-dracula-purple/20 text-dracula-purple shadow-[0_0_12px_rgba(189,147,249,0.3)]"
                 : "bg-surface text-dracula-comment hover:text-foreground"
             }`}
           >
@@ -144,7 +208,7 @@ export default function RevShellGenerator() {
                 os !== "windows" ? "border-r border-border" : ""
               } ${
                 osFilter === os
-                  ? "bg-dracula-cyan/20 text-dracula-cyan"
+                  ? "bg-dracula-cyan/20 text-dracula-cyan shadow-[0_0_12px_rgba(139,233,253,0.3)]"
                   : "bg-surface text-dracula-comment hover:text-foreground"
               }`}
             >
@@ -261,7 +325,7 @@ export default function RevShellGenerator() {
               onClick={() => setSelectedVariant(i)}
               className={`text-xs px-3 py-1.5 rounded border transition-all ${
                 effectiveVariantIdx === i
-                  ? "border-dracula-purple text-dracula-purple bg-dracula-purple/10"
+                  ? "border-dracula-purple text-dracula-purple bg-dracula-purple/10 shadow-[0_0_12px_rgba(189,147,249,0.3)]"
                   : "border-border text-dracula-comment hover:text-foreground hover:border-dracula-comment"
               }`}
             >
@@ -287,7 +351,16 @@ export default function RevShellGenerator() {
               </span>
             )}
           </h2>
-          <CopyButton text={encodedCommand} />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleShare}
+              className="text-xs px-3 py-1 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-green transition-all"
+              title="Copy shareable URL with current configuration"
+            >
+              {shared ? "Copied!" : "Share URL"}
+            </button>
+            <CopyButton text={encodedCommand} />
+          </div>
         </div>
         <div className="relative rounded-lg border border-border bg-dracula-bg overflow-hidden">
           <pre className="p-4 text-sm text-dracula-fg overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">

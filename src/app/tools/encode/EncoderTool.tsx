@@ -257,6 +257,17 @@ export default function EncoderTool() {
     }
   }, [input, steps]);
 
+  // Check which preset matches the current chain
+  const activePresetLabel = useMemo(() => {
+    const currentOps = steps.map((s) => s.operationId);
+    const match = presets.find(
+      (p) =>
+        p.ops.length === currentOps.length &&
+        p.ops.every((op, i) => op === currentOps[i])
+    );
+    return match?.label ?? null;
+  }, [steps, presets]);
+
   // Determine which options to render in selects
   const selectGroups = filteredGroupedOps.length > 0 ? filteredGroupedOps : groupedOps;
 
@@ -272,7 +283,11 @@ export default function EncoderTool() {
             <button
               key={p.label}
               onClick={() => applyPreset(p.ops)}
-              className="text-xs px-3 py-1.5 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-purple transition-all"
+              className={`text-xs px-3 py-1.5 rounded border transition-all ${
+                activePresetLabel === p.label
+                  ? "border-dracula-purple text-dracula-purple bg-dracula-purple/10 shadow-[0_0_12px_rgba(189,147,249,0.3)]"
+                  : "border-border text-dracula-comment hover:text-foreground hover:border-dracula-purple"
+              }`}
             >
               {p.label}
             </button>
