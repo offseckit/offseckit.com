@@ -5,7 +5,7 @@ export const meta: BlogPost = {
   title: "Nmap Cheat Sheet 2026 — Commands, Scan Types, Flags, and NSE Scripts",
   description:
     "Complete nmap cheat sheet for pentesters. Covers scan types, port specification, service detection, NSE scripts, timing templates, firewall evasion, and output options with copy-paste ready examples.",
-  date: "2026-03-22",
+  date: "2026-03-16",
   author: "4252nez",
   keywords: [
     "nmap cheat sheet",

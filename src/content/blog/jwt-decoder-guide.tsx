@@ -5,7 +5,7 @@ export const meta: BlogPost = {
   title: "JWT Decoder Cheat Sheet 2026 — Decode, Analyze, and Exploit JSON Web Tokens",
   description:
     "Complete guide to decoding and analyzing JWT tokens for pentesters. Covers JWT structure, common vulnerabilities (alg:none, algorithm confusion), security analysis, and practical exploitation tips.",
-  date: "2026-03-22",
+  date: "2026-03-14",
   author: "4252nez",
   keywords: [
     "JWT decoder",

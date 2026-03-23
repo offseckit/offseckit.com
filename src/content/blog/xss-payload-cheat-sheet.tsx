@@ -5,7 +5,7 @@ export const meta: BlogPost = {
   title: "XSS Payload Cheat Sheet 2026 — Context-Aware Payloads, WAF Bypass, and Filter Evasion",
   description:
     "Complete XSS payload cheat sheet for pentesters and bug bounty hunters. Covers injection contexts, WAF bypass techniques, encoding tricks, polyglot payloads, and filter evasion with copy-paste ready examples.",
-  date: "2026-03-22",
+  date: "2026-03-18",
   author: "4252nez",
   keywords: [
     "XSS cheat sheet",

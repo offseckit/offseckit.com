@@ -5,7 +5,7 @@ export const meta: BlogPost = {
   title: "HTTP Security Headers Cheat Sheet 2026 — HSTS, CSP, X-Frame-Options, and More",
   description:
     "Complete guide to HTTP security headers for pentesters and developers. Covers HSTS, Content-Security-Policy, X-Frame-Options, Referrer-Policy, Permissions-Policy, OWASP recommendations, deprecated headers, and remediation guidance.",
-  date: "2026-03-22",
+  date: "2026-03-19",
   author: "4252nez",
   keywords: [
     "HTTP security headers",

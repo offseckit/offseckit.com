@@ -14,7 +14,7 @@ export const posts: BlogPost[] = [
     title: "Reverse Shell Cheat Sheet 2026 — One-Liners for Every Language",
     description:
       "Complete reverse shell cheat sheet with one-liners in Bash, Python, PowerShell, PHP, Ruby, Perl, Netcat, and more. Copy-paste ready for your next pentest.",
-    date: "2026-03-22",
+    date: "2026-03-08",
     author: "4252nez",
     keywords: [
       "reverse shell cheat sheet",
@@ -29,7 +29,7 @@ export const posts: BlogPost[] = [
     title: "Encoding & Decoding for Pentesters — Base64, URL, Hex, and Beyond",
     description:
       "Practical guide to encoding and decoding techniques used in penetration testing. Covers Base64, URL encoding, Hex, HTML entities, Unicode, and chaining techniques for WAF bypass.",
-    date: "2026-03-22",
+    date: "2026-03-10",
     author: "4252nez",
     keywords: [
       "base64 decode",
@@ -46,7 +46,7 @@ export const posts: BlogPost[] = [
     title: "Hash Identifier Cheat Sheet 2026 — MD5, SHA, NTLM, and More",
     description:
       "Complete guide to identifying hash types by length and format. Covers MD5, SHA-1, SHA-256, SHA-512, NTLM, SHA-3, and more with examples, hashcat modes, and practical tips for pentesters.",
-    date: "2026-03-22",
+    date: "2026-03-12",
     author: "4252nez",
     keywords: [
       "hash identifier",
@@ -63,7 +63,7 @@ export const posts: BlogPost[] = [
     title: "JWT Decoder Cheat Sheet 2026 — Decode, Analyze, and Exploit JSON Web Tokens",
     description:
       "Complete guide to decoding and analyzing JWT tokens for pentesters. Covers JWT structure, common vulnerabilities (alg:none, algorithm confusion), security analysis, and practical exploitation tips.",
-    date: "2026-03-22",
+    date: "2026-03-14",
     author: "4252nez",
     keywords: [
       "JWT decoder",
@@ -82,7 +82,7 @@ export const posts: BlogPost[] = [
     title: "Nmap Cheat Sheet 2026 — Commands, Scan Types, Flags, and NSE Scripts",
     description:
       "Complete nmap cheat sheet for pentesters. Covers scan types, port specification, service detection, NSE scripts, timing templates, firewall evasion, and output options with copy-paste ready examples.",
-    date: "2026-03-22",
+    date: "2026-03-16",
     author: "4252nez",
     keywords: [
       "nmap cheat sheet",
@@ -101,7 +101,7 @@ export const posts: BlogPost[] = [
     title: "XSS Payload Cheat Sheet 2026 — Context-Aware Payloads, WAF Bypass, and Filter Evasion",
     description:
       "Complete XSS payload cheat sheet for pentesters and bug bounty hunters. Covers injection contexts, WAF bypass techniques, encoding tricks, polyglot payloads, and filter evasion with copy-paste ready examples.",
-    date: "2026-03-22",
+    date: "2026-03-18",
     author: "4252nez",
     keywords: [
       "XSS cheat sheet",
@@ -121,7 +121,7 @@ export const posts: BlogPost[] = [
     title: "HTTP Security Headers Cheat Sheet 2026 — HSTS, CSP, X-Frame-Options, and More",
     description:
       "Complete guide to HTTP security headers for pentesters and developers. Covers HSTS, Content-Security-Policy, X-Frame-Options, Referrer-Policy, Permissions-Policy, OWASP recommendations, deprecated headers, and remediation guidance.",
-    date: "2026-03-22",
+    date: "2026-03-19",
     author: "4252nez",
     keywords: [
       "HTTP security headers",
@@ -140,7 +140,7 @@ export const posts: BlogPost[] = [
     title: "CVSS Calculator Cheat Sheet 2026 — CVSS 3.1 vs 4.0 Scoring Guide for Pentesters",
     description:
       "Complete guide to CVSS vulnerability scoring for pentesters and security analysts. Covers CVSS 3.1 and 4.0 differences, base/temporal/environmental metrics, score calculation, common vulnerability scores, and practical tips for writing pentest reports.",
-    date: "2026-03-22",
+    date: "2026-03-20",
     author: "4252nez",
     keywords: [
       "CVSS calculator",
@@ -158,7 +158,7 @@ export const posts: BlogPost[] = [
     title: "Subnet Calculator Cheat Sheet 2026 — CIDR Notation, Subnet Masks, and IP Ranges for Pentesters",
     description:
       "Complete guide to subnetting for pentesters and network engineers. Covers CIDR notation, subnet masks, wildcard masks, subnet splitting, RFC 1918 private ranges, and practical tips for scope verification and network enumeration.",
-    date: "2026-03-22",
+    date: "2026-03-21",
     author: "4252nez",
     keywords: [
       "subnet calculator",

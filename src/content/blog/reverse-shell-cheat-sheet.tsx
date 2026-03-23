@@ -5,7 +5,7 @@ export const meta: BlogPost = {
   title: "Reverse Shell Cheat Sheet 2026 — One-Liners for Every Language",
   description:
     "Complete reverse shell cheat sheet with one-liners in Bash, Python, PowerShell, PHP, Ruby, Perl, Netcat, and more. Copy-paste ready for your next pentest.",
-  date: "2026-03-22",
+  date: "2026-03-08",
   author: "4252nez",
   keywords: [
     "reverse shell cheat sheet",

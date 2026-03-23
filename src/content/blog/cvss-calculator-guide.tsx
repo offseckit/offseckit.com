@@ -5,7 +5,7 @@ export const meta: BlogPost = {
   title: "CVSS Calculator Cheat Sheet 2026 — CVSS 3.1 vs 4.0 Scoring Guide for Pentesters",
   description:
     "Complete guide to CVSS vulnerability scoring for pentesters and security analysts. Covers CVSS 3.1 and 4.0 differences, base/temporal/environmental metrics, score calculation, common vulnerability scores, and practical tips for writing pentest reports.",
-  date: "2026-03-22",
+  date: "2026-03-20",
   author: "4252nez",
   keywords: [
     "CVSS calculator",
