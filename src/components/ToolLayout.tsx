@@ -116,11 +116,6 @@ export default function ToolLayout({ tool, children, faq, githubUrl }: ToolLayou
           {/* Tool content */}
           <div className="mb-12">{children}</div>
 
-          {/* Email capture */}
-          <div className="mb-12">
-            <EmailCapture />
-          </div>
-
           {/* FAQ */}
           {faq && faq.length > 0 && (
             <section className="mb-12">
@@ -145,7 +140,7 @@ export default function ToolLayout({ tool, children, faq, githubUrl }: ToolLayou
 
           {/* Related tools */}
           {related.length > 0 && (
-            <section>
+            <section className="mb-12">
               <h2 className="text-lg font-bold text-foreground mb-4">
                 Related Tools
               </h2>
@@ -156,6 +151,11 @@ export default function ToolLayout({ tool, children, faq, githubUrl }: ToolLayou
               </div>
             </section>
           )}
+
+          {/* Email capture — after everything, user is done with tool */}
+          <section>
+            <EmailCapture variant="tool-page" />
+          </section>
         </div>
       </main>
       <Footer />

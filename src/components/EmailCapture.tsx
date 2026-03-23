@@ -2,15 +2,38 @@
 
 import { useState } from "react";
 
-export default function EmailCapture() {
+interface EmailCaptureProps {
+  variant?: "blog" | "tools" | "tool-page";
+}
+
+const MESSAGES = {
+  blog: {
+    heading: "More cheat sheets like this, straight to your inbox.",
+    subtext: "One email per launch. No spam, no fluff.",
+    button: "Subscribe",
+  },
+  tools: {
+    heading: "Get notified when we ship new tools.",
+    subtext: "No spam — just tool launches.",
+    button: "Notify Me",
+  },
+  "tool-page": {
+    heading: "New tools added regularly.",
+    subtext: "Get notified.",
+    button: "Subscribe",
+  },
+};
+
+export default function EmailCapture({ variant = "tools" }: EmailCaptureProps) {
   const [submitted, setSubmitted] = useState(false);
+  const msg = MESSAGES[variant];
 
   return (
     <div className="rounded-lg border border-border bg-surface p-6">
       <h3 className="text-sm font-bold text-foreground">
-        New security tools dropping regularly.
+        {msg.heading}
       </h3>
-      <p className="mt-1 text-xs text-dracula-comment">No spam, just tools.</p>
+      <p className="mt-1 text-xs text-dracula-comment">{msg.subtext}</p>
 
       {submitted ? (
         <p className="mt-4 text-sm text-dracula-green">
@@ -36,7 +59,7 @@ export default function EmailCapture() {
             type="submit"
             className="px-4 py-2 rounded-lg bg-dracula-pink text-foreground text-sm font-semibold hover:opacity-90 transition-opacity shrink-0"
           >
-            Subscribe
+            {msg.button}
           </button>
         </form>
       )}

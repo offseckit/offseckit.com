@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
+import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
 import { meta, Content } from "@/content/blog/cvss-calculator-guide";
 
@@ -62,6 +63,10 @@ export default function BlogPostPage() {
 
           <div className="prose-custom">
             <Content />
+          </div>
+
+          <div className="mt-10">
+            <EmailCapture variant="blog" />
           </div>
         </article>
       </main>

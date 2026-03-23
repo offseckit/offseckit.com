@@ -48,7 +48,7 @@ export default function BlogPage() {
 
           {/* Email capture */}
           <div className="mt-10">
-            <EmailCapture />
+            <EmailCapture variant="tools" />
           </div>
         </div>
       </main>

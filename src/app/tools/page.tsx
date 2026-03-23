@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ToolCard from "@/components/ToolCard";
+import EmailCapture from "@/components/EmailCapture";
 import { tools } from "@/lib/tools";
 
 export const metadata: Metadata = {
@@ -51,6 +52,11 @@ export default function ToolsPage() {
               </div>
             </section>
           )}
+
+          {/* Email capture */}
+          <section className="mt-10">
+            <EmailCapture variant="tools" />
+          </section>
         </div>
       </main>
       <Footer />
