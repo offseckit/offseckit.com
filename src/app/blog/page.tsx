@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import EmailCapture from "@/components/EmailCapture";
 import { getSortedPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -43,6 +44,11 @@ export default function BlogPage() {
                 </article>
               </Link>
             ))}
+          </div>
+
+          {/* Email capture */}
+          <div className="mt-10">
+            <EmailCapture />
           </div>
         </div>
       </main>

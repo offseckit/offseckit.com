@@ -4,6 +4,7 @@ import { getRelatedTools } from "@/lib/tools";
 import Header from "./Header";
 import Footer from "./Footer";
 import ToolCard from "./ToolCard";
+import EmailCapture from "./EmailCapture";
 
 interface FAQ {
   question: string;
@@ -20,8 +21,54 @@ interface ToolLayoutProps {
 export default function ToolLayout({ tool, children, faq, githubUrl }: ToolLayoutProps) {
   const related = getRelatedTools(tool.slug);
 
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: tool.name,
+    description: tool.description,
+    url: `https://offseckit.com/tools/${tool.slug}`,
+    applicationCategory: "SecurityApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    author: {
+      "@type": "Organization",
+      name: "OffSecKit",
+      url: "https://offseckit.com",
+    },
+  };
+
+  const faqSchema =
+    faq && faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }
+      : null;
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8">
@@ -69,8 +116,10 @@ export default function ToolLayout({ tool, children, faq, githubUrl }: ToolLayou
           {/* Tool content */}
           <div className="mb-12">{children}</div>
 
-          {/* Ad slot placeholder */}
-          <div className="mb-12" id="ad-slot" />
+          {/* Email capture */}
+          <div className="mb-12">
+            <EmailCapture />
+          </div>
 
           {/* FAQ */}
           {faq && faq.length > 0 && (
