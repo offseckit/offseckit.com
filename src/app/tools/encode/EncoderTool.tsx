@@ -4,7 +4,9 @@ import { useState, useMemo, useCallback } from "react";
 import {
   getOperations,
   runChain,
+  detectEncoding,
   type ChainStep,
+  type DetectedEncoding,
 } from "@/lib/encode";
 import CopyButton from "@/components/CopyButton";
 
@@ -13,12 +15,67 @@ function nextStepId() {
   return "step-" + ++stepCounter;
 }
 
+/* ── URL hash serialization ────────────────────────────────────── */
+
+function serializeToHash(input: string, steps: ChainStep[]) {
+  try {
+    const state = {
+      i: input,
+      s: steps.map((s) => s.operationId),
+    };
+    const json = JSON.stringify(state);
+    const encoded = btoa(unescape(encodeURIComponent(json)));
+    return encoded;
+  } catch {
+    return "";
+  }
+}
+
+function deserializeFromHash(
+  hash: string
+): { input: string; ops: string[] } | null {
+  try {
+    const clean = hash.replace(/^#/, "");
+    if (!clean) return null;
+    const json = decodeURIComponent(escape(atob(clean)));
+    const state = JSON.parse(json);
+    if (typeof state.i === "string" && Array.isArray(state.s)) {
+      return { input: state.i, ops: state.s as string[] };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function getInitialState(): { input: string; steps: ChainStep[] } {
+  if (typeof window !== "undefined") {
+    const state = deserializeFromHash(window.location.hash);
+    if (state) {
+      return {
+        input: state.input,
+        steps: state.ops.map((operationId) => ({ id: nextStepId(), operationId })),
+      };
+    }
+  }
+  return {
+    input: "",
+    steps: [{ id: nextStepId(), operationId: "base64-encode" }],
+  };
+}
+
+/* ── Component ─────────────────────────────────────────────────── */
+
 export default function EncoderTool() {
   const operations = getOperations();
-  const [input, setInput] = useState("");
-  const [steps, setSteps] = useState<ChainStep[]>([
-    { id: nextStepId(), operationId: "base64-encode" },
-  ]);
+  const [initial] = useState(getInitialState);
+  const [input, setInput] = useState(initial.input);
+  const [steps, setSteps] = useState<ChainStep[]>(initial.steps);
+  const [opSearch, setOpSearch] = useState("");
+  const [detectedEncodings, setDetectedEncodings] = useState<
+    DetectedEncoding[]
+  >([]);
+  const [showDetected, setShowDetected] = useState(false);
 
   const { results, error, errorStep } = useMemo(
     () => (input ? runChain(input, steps) : { results: [] }),
@@ -83,9 +140,7 @@ export default function EncoderTool() {
           oppositeId = "unicode-escape";
         }
 
-        return oppositeId
-          ? { ...step, operationId: oppositeId }
-          : step;
+        return oppositeId ? { ...step, operationId: oppositeId } : step;
       });
     });
   }, [operations]);
@@ -95,7 +150,15 @@ export default function EncoderTool() {
     const groups: { label: string; ops: typeof operations }[] = [
       {
         label: "Base64",
-        ops: operations.filter((o) => o.id.startsWith("base64")),
+        ops: operations.filter(
+          (o) => o.id.startsWith("base64-") || o.id.startsWith("base64url")
+        ),
+      },
+      {
+        label: "Base32 / Base58",
+        ops: operations.filter(
+          (o) => o.id.startsWith("base32") || o.id.startsWith("base58")
+        ),
       },
       {
         label: "URL",
@@ -114,6 +177,10 @@ export default function EncoderTool() {
         ops: operations.filter((o) => o.id.startsWith("unicode")),
       },
       {
+        label: "Punycode",
+        ops: operations.filter((o) => o.id.startsWith("punycode")),
+      },
+      {
         label: "Binary",
         ops: operations.filter((o) => o.id.startsWith("binary")),
       },
@@ -126,12 +193,30 @@ export default function EncoderTool() {
       {
         label: "Transform",
         ops: operations.filter((o) =>
-          ["rot13", "reverse", "uppercase", "lowercase"].includes(o.id)
+          ["rot13", "rot47", "reverse", "uppercase", "lowercase"].includes(o.id)
         ),
       },
     ];
     return groups;
   }, [operations]);
+
+  // Filter operations based on search
+  const filteredGroupedOps = useMemo(() => {
+    if (!opSearch.trim()) return groupedOps;
+    const q = opSearch.toLowerCase();
+    return groupedOps
+      .map((group) => ({
+        ...group,
+        ops: group.ops.filter(
+          (op) =>
+            op.name.toLowerCase().includes(q) ||
+            op.id.toLowerCase().includes(q) ||
+            op.description.toLowerCase().includes(q) ||
+            group.label.toLowerCase().includes(q)
+        ),
+      }))
+      .filter((group) => group.ops.length > 0);
+  }, [groupedOps, opSearch]);
 
   // Quick-action presets
   const presets = [
@@ -149,6 +234,31 @@ export default function EncoderTool() {
   const applyPreset = useCallback((ops: string[]) => {
     setSteps(ops.map((operationId) => ({ id: nextStepId(), operationId })));
   }, []);
+
+  // Auto-detect encoding
+  const handleDetect = useCallback(() => {
+    if (!input.trim()) {
+      setDetectedEncodings([]);
+      setShowDetected(false);
+      return;
+    }
+    const detected = detectEncoding(input);
+    setDetectedEncodings(detected);
+    setShowDetected(true);
+  }, [input]);
+
+  // Share URL
+  const handleShare = useCallback(() => {
+    const hash = serializeToHash(input, steps);
+    if (hash && typeof window !== "undefined") {
+      const url = window.location.origin + window.location.pathname + "#" + hash;
+      window.history.replaceState(null, "", "#" + hash);
+      navigator.clipboard.writeText(url);
+    }
+  }, [input, steps]);
+
+  // Determine which options to render in selects
+  const selectGroups = filteredGroupedOps.length > 0 ? filteredGroupedOps : groupedOps;
 
   return (
     <div className="space-y-6">
@@ -176,14 +286,35 @@ export default function EncoderTool() {
           <label className="block text-xs text-dracula-comment">
             Operation Chain
           </label>
-          <button
-            onClick={swapDirection}
-            className="text-xs px-3 py-1 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-cyan transition-all"
-            title="Reverse chain and swap encode/decode directions"
-          >
-            Swap Direction
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleShare}
+              className="text-xs px-3 py-1 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-green transition-all"
+              title="Copy shareable URL with current recipe and input"
+            >
+              Share URL
+            </button>
+            <button
+              onClick={swapDirection}
+              className="text-xs px-3 py-1 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-cyan transition-all"
+              title="Reverse chain and swap encode/decode directions"
+            >
+              Swap Direction
+            </button>
+          </div>
         </div>
+
+        {/* Operation search/filter */}
+        <div className="mb-2">
+          <input
+            type="text"
+            value={opSearch}
+            onChange={(e) => setOpSearch(e.target.value)}
+            placeholder="Filter operations... (e.g. base64, url, hex)"
+            className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-sm text-foreground focus:outline-none focus:border-dracula-purple placeholder:text-dracula-comment/50"
+          />
+        </div>
+
         <div className="space-y-2">
           {steps.map((step, i) => (
             <div key={step.id} className="flex items-center gap-2">
@@ -199,7 +330,7 @@ export default function EncoderTool() {
                     : "border-border"
                 }`}
               >
-                {groupedOps.map((group) => (
+                {selectGroups.map((group) => (
                   <optgroup key={group.label} label={group.label}>
                     {group.ops.map((op) => (
                       <option key={op.id} value={op.id}>
@@ -257,7 +388,18 @@ export default function EncoderTool() {
                 {new TextEncoder().encode(input).length} bytes
               </span>
               <button
-                onClick={() => setInput("")}
+                onClick={handleDetect}
+                className="text-xs px-2 py-1 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-yellow transition-all"
+                title="Auto-detect what encoding the input might be"
+              >
+                Detect
+              </button>
+              <button
+                onClick={() => {
+                  setInput("");
+                  setShowDetected(false);
+                  setDetectedEncodings([]);
+                }}
                 className="text-xs px-2 py-1 rounded border border-border text-dracula-comment hover:text-foreground transition-all"
               >
                 Clear
@@ -266,12 +408,56 @@ export default function EncoderTool() {
           </div>
           <textarea
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              setInput(e.target.value);
+              if (showDetected) setShowDetected(false);
+            }}
             placeholder="Enter text to encode or decode..."
             rows={8}
             className="w-full px-4 py-3 rounded-lg border border-border bg-dracula-bg text-dracula-fg text-sm font-mono focus:outline-none focus:border-dracula-purple resize-y leading-relaxed"
             spellCheck={false}
           />
+
+          {/* Auto-detect results */}
+          {showDetected && detectedEncodings.length > 0 && (
+            <div className="mt-2 rounded-lg border border-dracula-yellow/30 bg-surface p-3">
+              <p className="text-xs text-dracula-yellow mb-2 font-semibold">
+                Detected encodings:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {detectedEncodings.map((det, i) => (
+                  <button
+                    key={det.id + "-" + i}
+                    onClick={() =>
+                      setSteps([
+                        { id: nextStepId(), operationId: det.id },
+                      ])
+                    }
+                    className={`text-xs px-3 py-1.5 rounded border transition-all ${
+                      det.confidence === "high"
+                        ? "border-dracula-green text-dracula-green hover:bg-dracula-green/10"
+                        : det.confidence === "medium"
+                        ? "border-dracula-yellow text-dracula-yellow hover:bg-dracula-yellow/10"
+                        : "border-dracula-comment text-dracula-comment hover:bg-dracula-comment/10"
+                    }`}
+                    title={`Confidence: ${det.confidence}`}
+                  >
+                    {det.name}
+                    <span className="ml-1 opacity-60">
+                      ({det.confidence})
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {showDetected && detectedEncodings.length === 0 && (
+            <div className="mt-2 rounded-lg border border-border bg-surface p-3">
+              <p className="text-xs text-dracula-comment">
+                No encoding patterns detected in the input.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Output */}
