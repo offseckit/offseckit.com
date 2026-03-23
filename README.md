@@ -21,6 +21,7 @@ Every tool runs 100% client-side — no data leaves your browser. No accounts, n
 | CVSS Calculator | [Use it](https://offseckit.com/tools/cvss) | `osk cvss` |
 | Subnet/CIDR Calculator | [Use it](https://offseckit.com/tools/subnet) | `osk subnet` |
 | CLI Output Formatter | [Use it](https://offseckit.com/tools/cli-format) | `osk format` |
+| Wordlist / Password Mutation Generator | [Use it](https://offseckit.com/tools/wordlist) | `osk wordlist` |
 
 ## CLI
 

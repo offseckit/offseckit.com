@@ -209,6 +209,25 @@ export const posts: BlogPost[] = [
     ],
     relatedTool: "sqli",
   },
+  {
+    slug: "wordlist-generator-guide",
+    title: "Wordlist Generator Cheat Sheet 2026 — Password Mutations, Leet Speak, and Custom Lists for Pentesters",
+    description:
+      "Complete guide to generating custom wordlists for penetration testing. Covers leet speak substitutions, case mutations, number/symbol appending, common password patterns, and tips for hashcat and John the Ripper.",
+    date: "2026-03-23",
+    author: "4252nez",
+    keywords: [
+      "wordlist generator",
+      "password mutation generator",
+      "custom wordlist pentesting",
+      "leet speak password",
+      "password list generator",
+      "hashcat wordlist",
+      "password cracking wordlist",
+      "wordlist cheat sheet",
+    ],
+    relatedTool: "wordlist",
+  },
 ];
 
 export function getSortedPosts(): BlogPost[] {

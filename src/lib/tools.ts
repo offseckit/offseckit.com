@@ -165,6 +165,23 @@ export const tools: Tool[] = [
       "code screenshot generator",
     ],
   },
+  {
+    slug: "wordlist",
+    name: "Wordlist / Password Mutation Generator",
+    shortName: "Wordlist",
+    description:
+      "Generate custom wordlists from base words with leet speak, case mutations, number/symbol appending, and common password patterns.",
+    category: "exploitation",
+    status: "live",
+    icon: "terminal",
+    keywords: [
+      "wordlist generator online",
+      "password mutation generator",
+      "custom wordlist pentesting",
+      "password list generator",
+      "wordlist generator",
+    ],
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
