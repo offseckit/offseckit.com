@@ -189,6 +189,26 @@ export const posts: BlogPost[] = [
     ],
     relatedTool: "cli-format",
   },
+  {
+    slug: "sql-injection-cheat-sheet",
+    title: "SQL Injection Cheat Sheet 2026 — Payloads for MySQL, MSSQL, PostgreSQL, Oracle, and SQLite",
+    description:
+      "Complete SQL injection cheat sheet for pentesters and bug bounty hunters. Covers UNION, blind, error-based, and stacked query injection with database-specific payloads, WAF bypass techniques, and authentication bypass methods.",
+    date: "2026-03-22",
+    author: "4252nez",
+    keywords: [
+      "SQL injection cheat sheet",
+      "SQLi payloads",
+      "SQL injection pentest",
+      "UNION SQL injection",
+      "blind SQL injection",
+      "error based SQL injection",
+      "SQL injection bypass",
+      "SQL injection authentication bypass",
+      "SQLi WAF bypass",
+    ],
+    relatedTool: "sqli",
+  },
 ];
 
 export function getSortedPosts(): BlogPost[] {

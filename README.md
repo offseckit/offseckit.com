@@ -16,6 +16,7 @@ Every tool runs 100% client-side — no data leaves your browser. No accounts, n
 | JWT Decoder & Analyzer | [Use it](https://offseckit.com/tools/jwt) | `osk jwt` |
 | Nmap Command Builder | [Use it](https://offseckit.com/tools/nmap) | `osk nmap` |
 | XSS Payload Generator | [Use it](https://offseckit.com/tools/xss) | `osk xss` |
+| SQL Injection Payload Generator | [Use it](https://offseckit.com/tools/sqli) | `osk sqli` |
 | HTTP Header Security Analyzer | [Use it](https://offseckit.com/tools/headers) | `osk headers` |
 | CVSS Calculator | [Use it](https://offseckit.com/tools/cvss) | `osk cvss` |
 | Subnet/CIDR Calculator | [Use it](https://offseckit.com/tools/subnet) | `osk subnet` |
@@ -36,6 +37,7 @@ osk hash id 5d41402abc4b2a76b9719d911017c592
 osk jwt decode eyJhbGciOiJIUzI1NiIs...
 osk nmap build -t 10.10.10.0/24 --syn --top-ports 1000
 osk xss gen --context html-attr --action alert
+osk sqli gen -d mysql -t union -c 3
 curl -sI https://example.com | osk headers analyze
 ```
 

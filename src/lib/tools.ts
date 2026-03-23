@@ -97,6 +97,24 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "sqli",
+    name: "SQL Injection Payload Generator",
+    shortName: "SQLi",
+    description:
+      "Context-aware SQL injection payload generation for MySQL, MSSQL, PostgreSQL, Oracle, and SQLite with WAF bypass variants.",
+    category: "exploitation",
+    status: "live",
+    icon: "code",
+    keywords: [
+      "SQL injection cheat sheet",
+      "SQL injection payloads",
+      "SQLi payload generator",
+      "SQL injection WAF bypass",
+      "SQL injection testing",
+      "UNION injection",
+    ],
+  },
+  {
     slug: "headers",
     name: "HTTP Header Security Analyzer",
     shortName: "Headers",
