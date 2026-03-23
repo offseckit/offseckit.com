@@ -35,6 +35,7 @@ export interface FormatOptions {
   theme: string;
   fontSize: number;
   padding: number;
+  width: number;
   windowTitle: string;
   showDots: boolean;
   background: BackgroundStyle;
@@ -180,6 +181,7 @@ export const DEFAULT_OPTIONS: FormatOptions = {
   theme: "dracula",
   fontSize: 14,
   padding: 24,
+  width: 0,
   windowTitle: "Terminal",
   showDots: true,
   background: { type: "gradient", from: "#6272a4", to: "#ff79c6", angle: 135 },

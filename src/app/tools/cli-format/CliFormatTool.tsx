@@ -202,6 +202,22 @@ export default function CliFormatTool() {
             />
           </div>
 
+          {/* Width */}
+          <div>
+            <label className="block text-xs text-dracula-comment mb-1">
+              Width: {options.width === 0 ? "Auto" : `${options.width}px`}
+            </label>
+            <input
+              type="range"
+              min={0}
+              max={1200}
+              step={40}
+              value={options.width}
+              onChange={(e) => updateOption("width", Number(e.target.value))}
+              className="w-full accent-dracula-purple"
+            />
+          </div>
+
           {/* Show Dots */}
           <div className="flex items-center gap-2">
             <input
@@ -300,7 +316,8 @@ export default function CliFormatTool() {
               padding:
                 options.background.type !== "none" ? `${options.padding}px` : 0,
               background: backgroundToCSS(options.background),
-              minWidth: "100%",
+              minWidth: options.width > 0 ? undefined : "100%",
+              width: options.width > 0 ? `${options.width}px` : undefined,
             }}
           >
             <TerminalWindow
@@ -475,11 +492,12 @@ async function renderToCanvas(
     maxWidth = Math.max(maxWidth, lineWidth);
   }
 
-  const terminalWidth = maxWidth + lineNumWidth + contentPadX * 2;
+  const autoWidth = maxWidth + lineNumWidth + contentPadX * 2;
+  const hasBg = options.background.type !== "none";
+  const terminalWidth = options.width > 0 ? options.width * scale - (hasBg ? padding * 2 : 0) : autoWidth;
   const terminalHeight =
     titleBarHeight + lines.length * lineHeight + contentPadY * 2;
 
-  const hasBg = options.background.type !== "none";
   const canvasWidth = hasBg
     ? terminalWidth + padding * 2
     : terminalWidth;
