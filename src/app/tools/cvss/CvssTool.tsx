@@ -34,15 +34,61 @@ const DEFAULT_40: Cvss40Metrics = {
   VC: "H", VI: "H", VA: "H", SC: "N", SI: "N", SA: "N",
 };
 
+/* ── URL hash serialization ────────────────────────────────────── */
+
+function serializeVectorToHash(vector: string): string {
+  try {
+    return btoa(unescape(encodeURIComponent(vector)));
+  } catch {
+    return "";
+  }
+}
+
+function deserializeVectorFromHash(hash: string): string | null {
+  try {
+    const clean = hash.replace(/^#/, "");
+    if (!clean) return null;
+    const vector = decodeURIComponent(escape(atob(clean)));
+    if (vector.startsWith("CVSS:")) return vector;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+interface InitialCvssState {
+  version: CvssVersion;
+  metrics31: Cvss31Metrics;
+  metrics40: Cvss40Metrics;
+}
+
+function getInitialCvssState(): InitialCvssState {
+  if (typeof window !== "undefined") {
+    const vector = deserializeVectorFromHash(window.location.hash);
+    if (vector) {
+      if (vector.startsWith("CVSS:3.1/") || vector.startsWith("CVSS:3.0/")) {
+        const parsed = parseCvss31Vector(vector);
+        if (parsed) return { version: "3.1", metrics31: parsed, metrics40: DEFAULT_40 };
+      } else if (vector.startsWith("CVSS:4.0/")) {
+        const parsed = parseCvss40Vector(vector);
+        if (parsed) return { version: "4.0", metrics31: DEFAULT_31, metrics40: parsed };
+      }
+    }
+  }
+  return { version: "3.1", metrics31: DEFAULT_31, metrics40: DEFAULT_40 };
+}
+
 // ── Main component ─────────────────────────────────────────────────
 
 export default function CvssTool() {
-  const [version, setVersion] = useState<CvssVersion>("3.1");
-  const [metrics31, setMetrics31] = useState<Cvss31Metrics>(DEFAULT_31);
-  const [metrics40, setMetrics40] = useState<Cvss40Metrics>(DEFAULT_40);
+  const [initialState] = useState(getInitialCvssState);
+  const [version, setVersion] = useState<CvssVersion>(initialState.version);
+  const [metrics31, setMetrics31] = useState<Cvss31Metrics>(initialState.metrics31);
+  const [metrics40, setMetrics40] = useState<Cvss40Metrics>(initialState.metrics40);
   const [vectorInput, setVectorInput] = useState("");
   const [vectorError, setVectorError] = useState("");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [shared, setShared] = useState(false);
 
   // Compute result
   const result = useMemo<CvssResult>(() => {
@@ -114,6 +160,18 @@ export default function CvssTool() {
     setVectorError("");
   }, [version]);
 
+  // Share URL
+  const handleShare = useCallback(() => {
+    const hash = serializeVectorToHash(result.vector);
+    if (hash && typeof window !== "undefined") {
+      const url = window.location.origin + window.location.pathname + "#" + hash;
+      window.history.replaceState(null, "", "#" + hash);
+      navigator.clipboard.writeText(url);
+      setShared(true);
+      setTimeout(() => setShared(false), 2000);
+    }
+  }, [result.vector]);
+
   const metricGroups = version === "3.1" ? CVSS31_METRIC_GROUPS : CVSS40_METRIC_GROUPS;
   const currentMetrics = version === "3.1" ? metrics31 : metrics40;
 
@@ -159,7 +217,16 @@ export default function CvssTool() {
           <h2 className="text-sm font-semibold text-foreground">
             <span className="text-dracula-pink">#</span> Vector String
           </h2>
-          <CopyButton text={result.vector} label="Copy" />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleShare}
+              className="text-xs px-3 py-1 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-green transition-all"
+              title="Copy shareable URL with current CVSS vector"
+            >
+              {shared ? "Copied!" : "Share URL"}
+            </button>
+            <CopyButton text={result.vector} label="Copy" />
+          </div>
         </div>
         <code className="text-xs text-dracula-cyan font-mono break-all block">
           {result.vector}
