@@ -3,17 +3,34 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EmailCapture from "@/components/EmailCapture";
+import JsonLd from "@/components/JsonLd";
+import { collectionPageSchema, breadcrumbSchema } from "@/lib/schema";
 import { getSortedPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Pentest Cheat Sheets & Security Guides",
   description:
     "Offensive security guides, cheat sheets, and tutorials for pentesters, red teamers, and bug bounty hunters.",
+  alternates: { canonical: "/blog" },
 };
+
+const schemas = [
+  collectionPageSchema({
+    name: "OffSecKit Blog",
+    description:
+      "Offensive security guides, cheat sheets, and tutorials for pentesters, red teamers, and bug bounty hunters.",
+    url: "https://offseckit.com/blog",
+  }),
+  breadcrumbSchema([
+    { name: "Home", url: "https://offseckit.com" },
+    { name: "Blog", url: "https://offseckit.com/blog" },
+  ]),
+];
 
 export default function BlogPage() {
   return (
     <>
+      <JsonLd data={schemas} />
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-8">

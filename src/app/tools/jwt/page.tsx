@@ -6,7 +6,7 @@ import JWTTool from "./JWTTool";
 const tool = getToolBySlug("jwt")!;
 
 export const metadata: Metadata = {
-  title: "JWT Decoder & Analyzer - Decode JWT Tokens Online | OffSecKit",
+  title: "JWT Decoder & Analyzer — Decode JWT Tokens",
   description:
     "Decode and analyze JWT tokens instantly. Inspect headers, payloads, check expiration, identify weak algorithms, and detect security issues. Free, 100% client-side.",
   keywords: [
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
       "Decode JWT tokens, inspect headers and payloads, check expiration, and identify weak algorithms. 100% client-side.",
     url: "https://offseckit.com/tools/jwt",
   },
+  alternates: { canonical: "/tools/jwt" },
 };
 
 const faq = [

@@ -5,6 +5,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ToolCard from "./ToolCard";
 import EmailCapture from "./EmailCapture";
+import JsonLd from "./JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 interface FAQ {
   question: string;
@@ -57,18 +59,19 @@ export default function ToolLayout({ tool, children, faq, githubUrl }: ToolLayou
         }
       : null;
 
+  const breadcrumb = breadcrumbSchema([
+    { name: "Home", url: "https://offseckit.com" },
+    { name: "Tools", url: "https://offseckit.com/tools" },
+    { name: tool.shortName, url: `https://offseckit.com/tools/${tool.slug}` },
+  ]);
+
+  const schemas = faqSchema
+    ? [webAppSchema, faqSchema, breadcrumb]
+    : [webAppSchema, breadcrumb];
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
-      />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      <JsonLd data={schemas} />
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8">

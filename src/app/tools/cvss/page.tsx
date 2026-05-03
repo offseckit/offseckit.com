@@ -6,7 +6,7 @@ import CvssTool from "./CvssTool";
 const tool = getToolBySlug("cvss")!;
 
 export const metadata: Metadata = {
-  title: "CVSS Calculator — CVSS 3.1 & 4.0 Score Calculator Online | OffSecKit",
+  title: "CVSS Calculator — CVSS 3.1 & 4.0 Score Online",
   description:
     "Free online CVSS calculator supporting both CVSS 3.1 and CVSS 4.0. Build vectors interactively, calculate base/temporal/environmental scores in real time, parse existing vectors, and score common vulnerability types. 100% client-side.",
   keywords: [
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
       "Interactive CVSS 3.1 and 4.0 vector builder with real-time score calculation. Parse vectors, use vulnerability presets, and calculate base, temporal, and environmental scores. Free, 100% client-side.",
     url: "https://offseckit.com/tools/cvss",
   },
+  alternates: { canonical: "/tools/cvss" },
 };
 
 const faq = [

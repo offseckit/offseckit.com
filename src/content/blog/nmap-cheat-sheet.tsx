@@ -2,7 +2,7 @@ import type { BlogPost } from "@/lib/blog";
 
 export const meta: BlogPost = {
   slug: "nmap-cheat-sheet",
-  title: "Nmap Cheat Sheet 2026 — Commands, Scan Types, Flags, and NSE Scripts",
+  title: "Nmap Cheat Sheet 2026 — Commands & NSE Scripts",
   description:
     "Complete nmap cheat sheet for pentesters. Covers scan types, port specification, service detection, NSE scripts, timing templates, firewall evasion, and output options with copy-paste ready examples.",
   date: "2026-03-16",

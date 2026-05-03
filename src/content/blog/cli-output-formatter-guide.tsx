@@ -2,7 +2,7 @@ import type { BlogPost } from "@/lib/blog";
 
 export const meta: BlogPost = {
   slug: "cli-output-formatter-guide",
-  title: "Terminal Screenshot Guide 2026 — Generate Beautiful CLI Output Images for Pentest Reports",
+  title: "CLI Screenshot Guide 2026 — Beautiful Output",
   description:
     "Complete guide to generating professional terminal screenshots for pentest reports, documentation, and blog posts. Covers ANSI color codes, terminal themes, export options, and tips for making security tool output look great.",
   date: "2026-03-22",

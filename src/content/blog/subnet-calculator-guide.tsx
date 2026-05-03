@@ -2,7 +2,7 @@ import type { BlogPost } from "@/lib/blog";
 
 export const meta: BlogPost = {
   slug: "subnet-calculator-guide",
-  title: "Subnet Calculator Cheat Sheet 2026 — CIDR Notation, Subnet Masks, and IP Ranges for Pentesters",
+  title: "Subnet Cheat Sheet 2026 — CIDR & IP Ranges",
   description:
     "Complete guide to subnetting for pentesters and network engineers. Covers CIDR notation, subnet masks, wildcard masks, subnet splitting, RFC 1918 private ranges, and practical tips for scope verification and network enumeration.",
   date: "2026-03-21",

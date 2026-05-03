@@ -77,7 +77,7 @@ export default function EmailCapture({ variant = "tools" }: EmailCaptureProps) {
           <button
             type="submit"
             disabled={status === "loading"}
-            className="px-4 py-2 rounded-lg bg-dracula-pink text-foreground text-sm font-semibold hover:opacity-90 transition-opacity shrink-0 disabled:opacity-50"
+            className="px-4 py-2 rounded-lg bg-dracula-pink text-dracula-bg text-sm font-semibold hover:opacity-90 transition-opacity shrink-0 disabled:opacity-50"
           >
             {status === "loading" ? "..." : msg.button}
           </button>

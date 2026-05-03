@@ -2,7 +2,7 @@ import type { BlogPost } from "@/lib/blog";
 
 export const meta: BlogPost = {
   slug: "hash-identifier-guide",
-  title: "Hash Identifier Cheat Sheet 2026 — MD5, SHA, NTLM, and More",
+  title: "Hash ID Cheat Sheet 2026 — MD5, SHA, NTLM",
   description:
     "Complete guide to identifying hash types by length and format. Covers MD5, SHA-1, SHA-256, SHA-512, NTLM, SHA-3, and more with examples, hashcat modes, and practical tips for pentesters.",
   date: "2026-03-12",

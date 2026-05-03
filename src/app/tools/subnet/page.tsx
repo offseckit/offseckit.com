@@ -6,7 +6,7 @@ import SubnetTool from "./SubnetTool";
 const tool = getToolBySlug("subnet")!;
 
 export const metadata: Metadata = {
-  title: "Subnet/CIDR Calculator — IP Subnet Calculator Online | OffSecKit",
+  title: "Subnet/CIDR Calculator — IP Subnet Calculator",
   description:
     "Free online subnet calculator. Calculate network addresses, broadcast addresses, subnet masks, wildcard masks, host ranges, and split subnets from CIDR notation. 100% client-side.",
   keywords: [
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
       "Calculate network addresses, broadcast addresses, subnet masks, host ranges, and split subnets from CIDR notation. Free, 100% client-side subnet calculator.",
     url: "https://offseckit.com/tools/subnet",
   },
+  alternates: { canonical: "/tools/subnet" },
 };
 
 const faq = [

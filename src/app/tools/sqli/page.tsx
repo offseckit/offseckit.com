@@ -6,7 +6,7 @@ import SQLiGenerator from "./SQLiGenerator";
 const tool = getToolBySlug("sqli")!;
 
 export const metadata: Metadata = {
-  title: "SQL Injection Payload Generator - SQLi Cheat Sheet | OffSecKit",
+  title: "SQL Injection Generator — SQLi Payloads",
   description:
     "Generate context-aware SQL injection payloads for MySQL, MSSQL, PostgreSQL, Oracle, and SQLite. UNION, blind, error-based, stacked queries with WAF bypass variants. Free SQLi cheat sheet. 100% client-side.",
   keywords: [
@@ -33,6 +33,7 @@ export const metadata: Metadata = {
       "Context-aware SQL injection payload generator for MySQL, MSSQL, PostgreSQL, Oracle, and SQLite. UNION, blind, error-based, and stacked queries with WAF bypass variants. Free SQLi cheat sheet for pentesters.",
     url: "https://offseckit.com/tools/sqli",
   },
+  alternates: { canonical: "/tools/sqli" },
 };
 
 const faq = [

@@ -6,7 +6,7 @@ import XSSGenerator from "./XSSGenerator";
 const tool = getToolBySlug("xss")!;
 
 export const metadata: Metadata = {
-  title: "XSS Payload Generator - Cross-Site Scripting Cheat Sheet | OffSecKit",
+  title: "XSS Payload Generator — Free XSS Cheat Sheet",
   description:
     "Generate context-aware XSS payloads with WAF bypass variants, filter evasion techniques, and encoding options. Free XSS cheat sheet and payload generator. 100% client-side.",
   keywords: [
@@ -33,6 +33,7 @@ export const metadata: Metadata = {
       "Context-aware XSS payload generator with WAF bypass profiles, filter evasion, encoding options, and polyglot payloads. Free XSS cheat sheet for pentesters.",
     url: "https://offseckit.com/tools/xss",
   },
+  alternates: { canonical: "/tools/xss" },
 };
 
 const faq = [

@@ -6,7 +6,7 @@ import EncoderTool from "./EncoderTool";
 const tool = getToolBySlug("encode")!;
 
 export const metadata: Metadata = {
-  title: "Base64 Decode & Encode Online - Hex, URL, HTML, Base32, Base58, Punycode Encoder | OffSecKit",
+  title: "Encoding Multi-Tool — Base64, Hex, URL Encoder",
   description:
     "Free online encoder/decoder for Base64, Base64url, Base32, Base58, URL, Hex, HTML entities, Punycode, Binary, Unicode, ROT13, ROT47, and more. Chain multiple encoding operations. Auto-detect encoding. 100% client-side.",
   keywords: [
@@ -48,6 +48,7 @@ export const metadata: Metadata = {
       "Encode and decode Base64, Base32, Base58, URL, Hex, HTML entities, Punycode, and more. Chain operations, auto-detect encodings, share recipes via URL. 100% client-side.",
     url: "https://offseckit.com/tools/encode",
   },
+  alternates: { canonical: "/tools/encode" },
 };
 
 const faq = [

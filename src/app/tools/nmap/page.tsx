@@ -6,7 +6,7 @@ import NmapBuilder from "./NmapBuilder";
 const tool = getToolBySlug("nmap")!;
 
 export const metadata: Metadata = {
-  title: "Nmap Command Builder - Generate Nmap Commands Online | OffSecKit",
+  title: "Nmap Command Builder — Generate Nmap Commands",
   description:
     "Visual nmap command builder and cheat sheet. Select scan types, flags, NSE scripts, and timing options with explanations. Generate copy-paste ready nmap commands. Free, 100% client-side.",
   keywords: [
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
       "Visual nmap command builder with scan types, flags, NSE scripts, and timing options. Generate copy-paste ready nmap commands.",
     url: "https://offseckit.com/tools/nmap",
   },
+  alternates: { canonical: "/tools/nmap" },
 };
 
 const faq = [

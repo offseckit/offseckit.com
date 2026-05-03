@@ -2,7 +2,7 @@ import type { BlogPost } from "@/lib/blog";
 
 export const meta: BlogPost = {
   slug: "sql-injection-cheat-sheet",
-  title: "SQL Injection Cheat Sheet 2026 — Payloads for MySQL, MSSQL, PostgreSQL, Oracle, and SQLite",
+  title: "SQL Injection Cheat Sheet 2026 — Payloads",
   description:
     "Complete SQL injection cheat sheet for pentesters and bug bounty hunters. Covers UNION, blind, error-based, and stacked query injection with database-specific payloads, WAF bypass techniques, and authentication bypass methods.",
   date: "2026-03-22",

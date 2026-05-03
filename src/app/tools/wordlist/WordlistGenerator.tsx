@@ -316,19 +316,19 @@ export default function WordlistGenerator() {
             <button
               onClick={handleShare}
               disabled={wordlist.length === 0}
-              className="text-xs px-3 py-1.5 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-purple transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              className="text-xs px-3 py-1.5 rounded border border-border text-dracula-comment hover:text-foreground hover:border-dracula-purple transition-all disabled:bg-surface-light disabled:cursor-not-allowed"
             >
               Share URL
             </button>
             <CopyButton
               text={wordlist.join("\n")}
               label="Copy All"
-              className={wordlist.length === 0 ? "opacity-40 cursor-not-allowed" : ""}
+              className={wordlist.length === 0 ? "bg-surface-light cursor-not-allowed" : ""}
             />
             <button
               onClick={handleDownload}
               disabled={wordlist.length === 0}
-              className="text-xs px-3 py-1.5 rounded border border-dracula-green text-dracula-green hover:bg-dracula-green/10 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              className="text-xs px-3 py-1.5 rounded border border-dracula-green text-dracula-green hover:bg-dracula-green/10 transition-all disabled:bg-surface-light disabled:cursor-not-allowed"
             >
               Download .txt
             </button>
@@ -352,7 +352,7 @@ export default function WordlistGenerator() {
               <div className="border-t border-border px-4 py-2 bg-surface-light">
                 <button
                   onClick={() => setShowAll(true)}
-                  className="text-xs text-dracula-cyan hover:underline"
+                  className="text-xs text-dracula-cyan underline hover:no-underline"
                 >
                   Showing {PREVIEW_LIMIT} of {wordlist.length.toLocaleString()} — click
                   to show all (may be slow)
@@ -363,7 +363,7 @@ export default function WordlistGenerator() {
               <div className="border-t border-border px-4 py-2 bg-surface-light">
                 <button
                   onClick={() => setShowAll(false)}
-                  className="text-xs text-dracula-cyan hover:underline"
+                  className="text-xs text-dracula-cyan underline hover:no-underline"
                 >
                   Collapse preview
                 </button>

@@ -6,7 +6,7 @@ import RevShellGenerator from "./RevShellGenerator";
 const tool = getToolBySlug("revshell")!;
 
 export const metadata: Metadata = {
-  title: "Reverse Shell Generator - Free Online One-Liner Generator",
+  title: "Reverse Shell Generator — Free One-Liners",
   description:
     "Generate reverse shell and bind shell one-liners in 18+ languages: Bash, Python, PowerShell, PHP, Ruby, Perl, Netcat, Socat, Java, C, C#, Golang, Awk, Zsh, and more. Copy-paste ready with encoding and target shell options. Free, client-side.",
   keywords: [
@@ -29,6 +29,7 @@ export const metadata: Metadata = {
       "Generate reverse shell and bind shell one-liners in 18+ languages. Configurable target shell, OS filtering, Base64/URL encoding. Copy-paste ready.",
     url: "https://offseckit.com/tools/revshell",
   },
+  alternates: { canonical: "/tools/revshell" },
 };
 
 const faq = [

@@ -2,7 +2,7 @@ import type { BlogPost } from "@/lib/blog";
 
 export const meta: BlogPost = {
   slug: "wordlist-generator-guide",
-  title: "Wordlist Generator Cheat Sheet 2026 — Password Mutations, Leet Speak, and Custom Lists for Pentesters",
+  title: "Wordlist Cheat Sheet 2026 — Password Mutations",
   description:
     "Complete guide to generating custom wordlists for penetration testing. Covers leet speak substitutions, case mutations, number/symbol appending, common password patterns, and tips for hashcat and John the Ripper.",
   date: "2026-03-23",

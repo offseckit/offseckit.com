@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
     title: "OffSecKit - Free Online Offensive Security Toolkit",
     description:
       "Free, browser-based offensive security tools. 100% client-side — no data leaves your browser.",
-    images: [{ url: "/og-image.png", width: 2752, height: 1536 }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -60,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jetbrainsMono.variable} h-full`}>
       <body className="min-h-full flex flex-col font-mono antialiased">
+        <JsonLd data={[organizationSchema, websiteSchema]} />
         {children}
       </body>
     </html>

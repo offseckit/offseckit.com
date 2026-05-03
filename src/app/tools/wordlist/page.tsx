@@ -6,7 +6,7 @@ import WordlistGenerator from "./WordlistGenerator";
 const tool = getToolBySlug("wordlist")!;
 
 export const metadata: Metadata = {
-  title: "Wordlist / Password Mutation Generator - Custom Wordlists Online | OffSecKit",
+  title: "Wordlist Generator — Custom Password Mutations",
   description:
     "Generate custom wordlists from base words with leet speak substitutions, case mutations, number/symbol appending, and common password patterns. Free, 100% client-side.",
   keywords: [
@@ -29,6 +29,7 @@ export const metadata: Metadata = {
       "Generate custom wordlists from base words with leet speak, case mutations, and common password patterns. 100% client-side.",
     url: "https://offseckit.com/tools/wordlist",
   },
+  alternates: { canonical: "/tools/wordlist" },
 };
 
 const faq = [

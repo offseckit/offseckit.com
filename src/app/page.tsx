@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ToolCard from "@/components/ToolCard";
 import { tools } from "@/lib/tools";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (
@@ -86,7 +91,7 @@ export default function Home() {
                 <code className="text-dracula-green">osk</code>, our unified CLI toolkit on{" "}
                 <a
                   href="https://github.com/offseckit"
-                  className="text-dracula-cyan hover:underline"
+                  className="text-dracula-cyan underline hover:no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

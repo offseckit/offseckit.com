@@ -6,7 +6,7 @@ import HeadersTool from "./HeadersTool";
 const tool = getToolBySlug("headers")!;
 
 export const metadata: Metadata = {
-  title: "HTTP Security Headers Analyzer - Check Headers Online | OffSecKit",
+  title: "HTTP Security Headers Analyzer — Check Headers",
   description:
     "Analyze HTTP response headers for security misconfigurations. Check HSTS, CSP, X-Frame-Options, and more with remediation guidance. Paste headers from curl or Burp. Free, 100% client-side.",
   keywords: [
@@ -33,6 +33,7 @@ export const metadata: Metadata = {
       "Paste HTTP response headers and get instant security analysis with grades, CSP evaluation, and remediation guidance. 100% client-side.",
     url: "https://offseckit.com/tools/headers",
   },
+  alternates: { canonical: "/tools/headers" },
 };
 
 const faq = [

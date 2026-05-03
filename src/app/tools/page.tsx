@@ -3,13 +3,29 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ToolCard from "@/components/ToolCard";
 import EmailCapture from "@/components/EmailCapture";
+import JsonLd from "@/components/JsonLd";
+import { collectionPageSchema, breadcrumbSchema } from "@/lib/schema";
 import { tools } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "All Tools",
+  title: "Free Pentest Tools — Online Security Toolkit",
   description:
     "Browse all free offensive security tools: reverse shell generator, hash identifier, JWT decoder, encoding multi-tool, and more.",
+  alternates: { canonical: "/tools" },
 };
+
+const schemas = [
+  collectionPageSchema({
+    name: "Free Pentest Tools",
+    description:
+      "Free, browser-based offensive security tools for pentesters, red teamers, and bug bounty hunters.",
+    url: "https://offseckit.com/tools",
+  }),
+  breadcrumbSchema([
+    { name: "Home", url: "https://offseckit.com" },
+    { name: "Tools", url: "https://offseckit.com/tools" },
+  ]),
+];
 
 export default function ToolsPage() {
   const liveTools = tools.filter((t) => t.status === "live");
@@ -17,6 +33,7 @@ export default function ToolsPage() {
 
   return (
     <>
+      <JsonLd data={schemas} />
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8">

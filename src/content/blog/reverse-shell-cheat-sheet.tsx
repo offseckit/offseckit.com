@@ -2,7 +2,7 @@ import type { BlogPost } from "@/lib/blog";
 
 export const meta: BlogPost = {
   slug: "reverse-shell-cheat-sheet",
-  title: "Reverse Shell Cheat Sheet 2026 — One-Liners for Every Language",
+  title: "Reverse Shell Cheat Sheet 2026 — One-Liners",
   description:
     "Complete reverse shell cheat sheet with one-liners in Bash, Python, PowerShell, PHP, Ruby, Perl, Netcat, and more. Copy-paste ready for your next pentest.",
   date: "2026-03-08",

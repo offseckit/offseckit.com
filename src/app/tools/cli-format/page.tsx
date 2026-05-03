@@ -6,7 +6,7 @@ import CliFormatTool from "./CliFormatTool";
 const tool = getToolBySlug("cli-format")!;
 
 export const metadata: Metadata = {
-  title: "CLI Output Formatter — Terminal Screenshot Generator | OffSecKit",
+  title: "CLI Output Formatter — Terminal Screenshot Generator",
   description:
     "Free online terminal screenshot generator. Paste terminal output, apply Dracula-themed syntax highlighting with ANSI color support, and export beautiful PNG images. 100% client-side.",
   keywords: [
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
       "Paste terminal output and generate styled, Dracula-themed screenshots with ANSI color support. Free, 100% client-side terminal screenshot generator.",
     url: "https://offseckit.com/tools/cli-format",
   },
+  alternates: { canonical: "/tools/cli-format" },
 };
 
 const faq = [

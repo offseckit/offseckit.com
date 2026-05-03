@@ -5,6 +5,9 @@ import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
 import { meta, Content } from "@/content/blog/cvss-calculator-guide";
 
+import JsonLd from "@/components/JsonLd";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+
 export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
@@ -16,11 +19,23 @@ export const metadata: Metadata = {
     publishedTime: meta.date,
     url: `https://offseckit.com/blog/${meta.slug}`,
   },
+  alternates: { canonical: `/blog/${meta.slug}` },
 };
+
+
+const schemas = [
+  blogPostingSchema(meta),
+  breadcrumbSchema([
+    { name: "Home", url: "https://offseckit.com" },
+    { name: "Blog", url: "https://offseckit.com/blog" },
+    { name: meta.title, url: `https://offseckit.com/blog/${meta.slug}` },
+  ]),
+];
 
 export default function BlogPostPage() {
   return (
     <>
+      <JsonLd data={schemas} />
       <Header />
       <main className="flex-1">
         <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-8">
@@ -43,7 +58,7 @@ export default function BlogPostPage() {
           <header className="mb-8">
             <div className="flex items-center gap-3 text-xs text-dracula-comment">
               <time>{meta.date}</time>
-              <span>by <a href="https://github.com/4252nez" target="_blank" rel="noopener noreferrer" className="text-dracula-cyan hover:underline">{meta.author}</a></span>
+              <span>by <a href="https://github.com/4252nez" target="_blank" rel="noopener noreferrer" className="text-dracula-cyan underline hover:no-underline">{meta.author}</a></span>
             </div>
             <h1 className="mt-2 text-2xl sm:text-3xl font-bold text-foreground leading-tight">
               {meta.title}

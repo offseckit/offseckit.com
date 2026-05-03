@@ -6,7 +6,7 @@ import HashTool from "./HashTool";
 const tool = getToolBySlug("hash")!;
 
 export const metadata: Metadata = {
-  title: "Hash Identifier & Generator - Identify Hash Types Online | OffSecKit",
+  title: "Hash Identifier & Generator — MD5, SHA, NTLM",
   description:
     "Identify unknown hash types and generate hashes in MD5, SHA1, SHA256, SHA512, NTLM, SHA3, and more. Detect hash algorithms by length and format. Free, 100% client-side.",
   keywords: [
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
       "Identify unknown hash types and generate MD5, SHA1, SHA256, SHA512, NTLM hashes. 100% client-side.",
     url: "https://offseckit.com/tools/hash",
   },
+  alternates: { canonical: "/tools/hash" },
 };
 
 const faq = [
