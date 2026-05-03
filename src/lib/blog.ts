@@ -228,6 +228,27 @@ export const posts: BlogPost[] = [
     ],
     relatedTool: "wordlist",
   },
+  {
+    slug: "chmod-linux-permissions-guide",
+    title: "Chmod Cheat Sheet 2026 — Linux Permissions, Setuid, and Privilege Escalation",
+    description:
+      "Practical chmod cheat sheet covering octal vs symbolic notation, setuid/setgid/sticky bits, common modes (755, 644, 600, 1777), and how to hunt setuid binaries during privilege escalation.",
+    date: "2026-05-03",
+    author: "4252nez",
+    keywords: [
+      "chmod cheat sheet",
+      "chmod calculator",
+      "linux permissions",
+      "chmod 755",
+      "chmod 644",
+      "chmod 777",
+      "setuid setgid sticky",
+      "rwx permissions",
+      "find perm 4000",
+      "linux privilege escalation",
+    ],
+    relatedTool: "chmod",
+  },
 ];
 
 export function getSortedPosts(): BlogPost[] {

@@ -182,6 +182,26 @@ export const tools: Tool[] = [
       "wordlist generator",
     ],
   },
+  {
+    slug: "chmod",
+    name: "Chmod / Linux Permissions Calculator",
+    shortName: "Chmod",
+    description:
+      "Convert between octal and symbolic Unix permissions. Toggle setuid/setgid/sticky bits, parse symbolic notation, and get copy-paste chmod commands with privesc context.",
+    category: "utility",
+    status: "live",
+    icon: "lock",
+    keywords: [
+      "chmod calculator",
+      "linux permissions calculator",
+      "chmod 755",
+      "chmod 644",
+      "octal permissions",
+      "symbolic permissions",
+      "setuid setgid sticky",
+      "chmod command generator",
+    ],
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {

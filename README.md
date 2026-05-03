@@ -22,6 +22,7 @@ Every tool runs 100% client-side — no data leaves your browser. No accounts, n
 | Subnet/CIDR Calculator | [Use it](https://offseckit.com/tools/subnet) | `osk subnet` |
 | CLI Output Formatter | [Use it](https://offseckit.com/tools/cli-format) | `osk format` |
 | Wordlist / Password Mutation Generator | [Use it](https://offseckit.com/tools/wordlist) | `osk wordlist` |
+| Chmod / Linux Permissions Calculator | [Use it](https://offseckit.com/tools/chmod) | `osk chmod` |
 
 ## CLI
 

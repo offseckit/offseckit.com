@@ -2,136 +2,175 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://offseckit.com</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/revshell</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/reverse-shell-cheat-sheet</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/encode</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/encoding-decoding-pentest-guide</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/hash</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/hash-identifier-guide</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/jwt</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/jwt-decoder-guide</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/nmap</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/nmap-cheat-sheet</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/xss</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/xss-payload-cheat-sheet</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/headers</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/security-headers-guide</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/cvss</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/cvss-calculator-guide</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/subnet</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/subnet-calculator-guide</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/sqli</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/sql-injection-cheat-sheet</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/cli-format</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/cli-output-formatter-guide</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://offseckit.com/tools/wordlist</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://offseckit.com/blog/wordlist-generator-guide</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://offseckit.com/tools/chmod</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://offseckit.com/blog/chmod-linux-permissions-guide</loc>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
